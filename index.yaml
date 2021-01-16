@@ -6,7 +6,7 @@ entries:
     created: 2019-04-16T09:12:27.955019+02:00
     description: A Helm chart for Kubernetes
 #     digest: 35a4e31bfacc496f1b1bce664652916bb8701cc9df77f1b90534f5234ff297a6
-    name: helm-chart-test
+    name: echo
     urls:
     - https://github.com/moondev/echo-chart/archive/main.tar.gz
     version: 0.1.0
