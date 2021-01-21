@@ -2,8 +2,8 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 namespace: bookinfo
 kind: Kustomization
 resources:
-- https://github.com/istio/istio/releases/download/1.8.2/istio-1.8.2-linux-amd64.tar.gz//istio-1.8.2/manifests/charts/base/crds/crd-operator.yaml
-- https://github.com/istio/istio/releases/download/1.8.2/istio-1.8.2-linux-amd64.tar.gz//istio-1.8.2/manifests/charts/istio-operator/files/gen-operator.yaml
+- https://raw.githubusercontent.com/istio/istio/1.8.2/manifests/charts/base/crds/crd-operator.yaml
+- https://raw.githubusercontent.com/istio/istio/1.8.2/manifests/charts/istio-operator/files/gen-operator.yaml
 - https://raw.githubusercontent.com/istio/istio/1.8.2/samples/bookinfo/platform/kube/bookinfo.yaml
 helmChartInflationGenerator:
 - chartRepoUrl: https://raw.githubusercontent.com/moondev/echo-chart/main
@@ -20,3 +20,10 @@ helmChartInflationGenerator:
         name: default
         labels:
           istio-injection: enabled
+    - apiVersion: install.istio.io/v1alpha1
+      kind: IstioOperator
+      metadata:
+        namespace: istio-system
+        name: example-istiocontrolplane
+      spec:
+        profile: demo
