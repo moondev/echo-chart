@@ -17,7 +17,7 @@ helmChartInflationGenerator:
     - apiVersion: v1
       kind: Namespace
       metadata:
-        name: default
+        name: bookinfo
         labels:
           istio-injection: enabled
     - apiVersion: install.istio.io/v1alpha1
