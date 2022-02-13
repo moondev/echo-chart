@@ -1,6 +1,6 @@
-#!/usr/bin/sh bash
+#!/usr/bin/env bash
 kubectl create cm kubeconfig \
-  --from-file=~/.kube/config \
+  --from-file=config=<(kubectl config view --flatten --minify) \
   --dry-run=client \
   -o yaml \
   | kustomize cfg cat \
