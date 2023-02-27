@@ -1,0 +1,64 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+metadata:
+  name: metallb-native
+resources:
+  # - https://raw.githubusercontent.com/metallb/metallb/v0.13.7/config/manifests/metallb-native.yaml
+  # - kustomization.yaml
+  # - github.com/metallb/metallb//config/manifests?ref=v0.13.7
+helmCharts:
+  - name: echo
+    repo: https://raw.githubusercontent.com/moondev/echo-chart/main/
+    valuesInline:
+      vars:
+        name: jankins
+        image: docker.io/jenkins/jenkins:latest
+        replicas: 2
+        host: www.google.com
+
+      items:
+        # - apiVersion: v1
+        #   kind: ConfigMap
+        #   metadata:
+        #     name: "{{ .Values.name }}"
+        #   # data: |
+        #   #   {{ tpl .Values.template . }}
+        - apiVersion: apps/v1
+          kind: Deployment
+          metadata:
+            labels:
+              app: "{{ .Values.vars.name }}"
+            name: "{{ .Values.vars.name }}"
+          spec:
+            selector:
+              matchLabels:
+                app: "{{ .Values.vars.name }}"
+            template:
+              metadata:
+                labels:
+                  app: "{{ .Values.vars.name }}"
+              spec:
+                containers:
+                - image: "{{ .Values.vars.image }}"
+                  name: "{{ .Values.vars.name }}"
+
+        - apiVersion: apps/v1
+          kind: ConfigMap
+          metadata:
+            name: my-configmap
+          data:
+            foo: bar
+            uuid: "{{ uuidv4 }}"
+            b64-enc: "{{ .Values.vars.name | b64enc }}"
+            b64-dec: "{{ .Values.vars.name | b64enc | b64dec }}"
+            get-ip: "{{ .Values.vars.host | getHostByName }}"
+            dir: "{{ .Template.BasePath }}"
+# patchesStrategicMerge:
+#   - |
+#       apiVersion: apps/v1
+#       kind: Deployment
+#       metadata:
+#         name: jankins
+#       spec:
+#         replicas: 2
