@@ -1,0 +1,10 @@
+#!/usr/bin/env -S go run github.com/rliebz/tusk@v0.6.4 -f
+---
+interpreter: bash -c
+tasks:
+  create:
+    run:
+      - echo create
+  delete:
+    run:
+      - echo delete
