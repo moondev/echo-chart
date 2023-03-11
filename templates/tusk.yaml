@@ -1,5 +1,7 @@
 {{ tpl (.Values.tusk.shebang) . }}
 ---
+metadata:
+  name: cli
 interpreter: {{ tpl (.Values.tusk.interpreter ) . }}
 options: {{ tpl (.Values.tusk.options | toJson) . }}
 tasks: {{ tpl (.Values.tusk.tasks | toJson) . }}
