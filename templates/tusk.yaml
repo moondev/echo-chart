@@ -1,8 +1,5 @@
-{{ tpl (.Values.tusk.shebang | toJson) . }}
+{{ tpl (.Values.tusk.shebang) . }}
 ---
-interpreter: {{ tpl (.Values.tusk.interpreter | toJson) . }}
+interpreter: {{ tpl (.Values.tusk.interpreter ) . }}
 options: {{ tpl (.Values.tusk.options | toJson) . }}
 tasks: {{ tpl (.Values.tusk.tasks | toJson) . }}
-
----
-{{ tpl (.Values.tusk.docs | toJson) . }}
