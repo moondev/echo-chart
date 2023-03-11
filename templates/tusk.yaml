@@ -1,9 +1,11 @@
-{{ tpl (.Values.tusk.shebang) . }}
+#!/usr/bin/env -S go run github.com/rliebz/tusk@v0.6.4 -f
 ---
 apiVersion: echo-chart.moondev.github.com/v1
 kind: Tusk
 metadata:
   name: cli
-interpreter: {{ tpl (.Values.tusk.interpreter ) . }}
-options: {{ tpl (.Values.tusk.options | toJson) . }}
-tasks: {{ tpl (.Values.tusk.tasks | toJson) . }}
+interpreter: bash -c
+tasks:
+  create:
+    run:
+      - echo create
