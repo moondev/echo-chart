@@ -4,8 +4,4 @@ apiVersion: echo-chart.moondev.github.com/v1
 kind: Tusk
 metadata:
   name: cli
-interpreter: bash -c
-tasks:
-  create:
-    run:
-      - echo create
+spec: items: {{ tpl (.Values.tusk | toJson) . }}
