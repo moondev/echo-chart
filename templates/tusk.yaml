@@ -1,5 +1,7 @@
 {{ tpl (.Values.tusk.shebang) . }}
 ---
+apiVersion: echo-chart.moondev.github.com/v1
+kind: Tusk
 metadata:
   name: cli
 interpreter: {{ tpl (.Values.tusk.interpreter ) . }}
