@@ -1,10 +1,8 @@
-#!/usr/bin/env -S go run github.com/rliebz/tusk@v0.6.4 -f
+{{ tpl (.Values.tusk.shebang | toJson) . }}
 ---
-interpreter: bash -c
-tasks:
-  create:
-    run:
-      - echo create
-  delete:
-    run:
-      - echo delete
+interpreter: {{ tpl (.Values.tusk.interpreter | toJson) . }}
+options: {{ tpl (.Values.tusk.options | toJson) . }}
+tasks: {{ tpl (.Values.tusk.tasks | toJson) . }}
+
+---
+{{ tpl (.Values.tusk.docs | toJson) . }}
